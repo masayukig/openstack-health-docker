@@ -1,0 +1,9 @@
+[submodule "api"]
+	path = api
+	url = https://github.com/masayukig/openstack-health-api-docker
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/masayukig/openstack-health-frontend-docker
+[submodule "db"]
+	path = db
+	url = https://github.com/masayukig/openstack-health-db-docker
