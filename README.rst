@@ -1,4 +1,20 @@
 openstack-health-docker
 =======================
 
-This repository is for managing the openstack-health docker repositories.
+This repository is for managing the openstack-health docker
+repositories.
+
+How to use
+----------
+
+You can run an api and frontend containers with `docker-compose up`
+command::
+
+  $ docker-compose up
+
+.. note::
+
+   Currently, db container is not supported yet. So, this command
+   connects to the existing upstream database by default. If you want
+   to change the behavior, configure the `openstack-health.conf` in
+   `api/etc` directory.
