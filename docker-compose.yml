@@ -16,6 +16,8 @@ db:
 subunit2sql:
   container_name: subunit2sql
   build: subunit2sql/
+  volumes:
+    - ./subunit2sql/data:/data
   links:
     - db
 
