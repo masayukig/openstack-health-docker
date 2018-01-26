@@ -4,9 +4,6 @@
 [submodule "frontend"]
 	path = frontend
 	url = https://github.com/masayukig/openstack-health-frontend-docker
-[submodule "db"]
-	path = db
-	url = https://github.com/masayukig/openstack-health-db-docker
 [submodule "subunit2sql"]
 	path = subunit2sql
 	url = https://github.com/masayukig/openstack-health-subunit2sql-docker
