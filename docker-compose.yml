@@ -11,13 +11,13 @@ db:
     MYSQL_ROOT_PASSWORD: 'my-strongest-password'
   volumes:
     - ./migrate:/docker-entrypoint-initdb.d
-    - ./data:/var/lib/mysql
+    - ./data/db:/var/lib/mysql
 
 subunit2sql:
   container_name: subunit2sql
   build: subunit2sql/
   volumes:
-    - ./subunit2sql/data:/data
+    - ./data/subunit2sql:/data
   links:
     - db
 
