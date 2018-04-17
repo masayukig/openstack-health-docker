@@ -14,7 +14,6 @@ command::
 
 .. note::
 
-   Currently, db container is not supported yet. So, this command
-   connects to the existing upstream database by default. If you want
-   to change the behavior, configure the `openstack-health.conf` in
-   `api/etc` directory.
+   If you want to change the behavior, configure the
+   `openstack-health.conf` in `api/etc` directory.
+
