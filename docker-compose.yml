@@ -22,6 +22,7 @@ subunit2sql:
     - db
   environment:
     - SUBUNIT2SQL_RUN_META
+    - SUBUNIT2SQL_ARTIFACTS
 
 api:
   container_name: api
