@@ -14,14 +14,14 @@ db:
     - ./data/db:/var/lib/mysql
 
 subunit2sql:
-  environment:
-    SUBUNIT2SQL_RUN_META: 'project:openstack/tempest, build_name:ardana-tempest-qe102-defcore'
   container_name: subunit2sql
   build: subunit2sql/
   volumes:
     - ./data/subunit2sql:/data
   links:
     - db
+  environment:
+    - SUBUNIT2SQL_RUN_META
 
 api:
   container_name: api
