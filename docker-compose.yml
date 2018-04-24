@@ -1,42 +1,65 @@
-db:
-  container_name: db
-  image: mariadb:latest
-  command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-  ports:
-    - "3306:3306"
-  environment:
-    MYSQL_DATABASE: subunit
-    MYSQL_USER: 'subunit'
-    MYSQL_PASSWORD: 'subunit'
-    MYSQL_ROOT_PASSWORD: 'my-strongest-password'
-  volumes:
-    - ./migrate:/docker-entrypoint-initdb.d
-    - ./data/db:/var/lib/mysql
+version: "3"
+services:
 
-subunit2sql:
-  container_name: subunit2sql
-  build: subunit2sql/
-  volumes:
-    - ./data/subunit2sql:/data
-  links:
-    - db
-  environment:
-    - SUBUNIT2SQL_RUN_META
-    - SUBUNIT2SQL_ARTIFACTS
+  db:
+    container_name: db
+    image: mariadb:latest
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: subunit
+      MYSQL_USER: 'subunit'
+      MYSQL_PASSWORD: 'subunit'
+      MYSQL_ROOT_PASSWORD: 'my-strongest-password'
+    volumes:
+      - ./migrate:/docker-entrypoint-initdb.d
+      - ./data/db:/var/lib/mysql
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
 
-api:
-  container_name: api
-  build: api/
-  volumes:
-    - ./api/etc:/app/etc
-  ports:
-    - "5000:5000"
-  links:
-    - db
+  subunit2sql:
+    container_name: subunit2sql
+    build: subunit2sql/
+    volumes:
+      - ./data/subunit2sql:/data
+    links:
+      - db
+    environment:
+      - SUBUNIT2SQL_RUN_META
+      - SUBUNIT2SQL_ARTIFACTS
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
 
-frontend:
-  container_name: frontend
-  build: frontend/
-  ports:
-    - "80:8080"
+  api:
+    container_name: api
+    build: api/
+    volumes:
+      - ./api/etc:/app/etc
+    ports:
+      - "5000:5000"
+    links:
+      - db
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+  frontend:
+    container_name: frontend
+    build: frontend/
+    ports:
+      - "80:8080"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
 
